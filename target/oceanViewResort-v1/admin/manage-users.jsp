@@ -1,22 +1,75 @@
 <%@include file="../includes/header_admin.jsp" %>
 
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+<main class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>User Management</h2>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-            <i class="fa-solid fa-user-plus me-2"></i> Add New User
+        <div>
+            <h2 class="fw-bold mb-0 text-dark">User Account Management</h2>
+            <p class="text-muted">Manage system access for Admins, Staff, and Customers.</p>
+        </div>
+        <button class="btn btn-primary rounded-pill shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+            <i class="fa-solid fa-user-plus me-2"></i>Register New Staff
         </button>
     </div>
 
-    <div class="card shadow-sm border-0">
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm p-3">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                        <i class="fa-solid fa-user-shield text-primary"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted fw-bold d-block">ADMINS</small>
+                        <h5 class="fw-bold mb-0">2</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm p-3">
+                <div class="d-flex align-items-center">
+                    <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3">
+                        <i class="fa-solid fa-user-tie text-info"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted fw-bold d-block">STAFF MEMBERS</small>
+                        <h5 class="fw-bold mb-0">12</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm p-3">
+                <div class="d-flex align-items-center">
+                    <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
+                        <i class="fa-solid fa-users text-success"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted fw-bold d-block">CUSTOMERS</small>
+                        <h5 class="fw-bold mb-0">854</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">All System Users</h5>
+            <div class="btn-group btn-group-sm shadow-sm">
+                <button class="btn btn-outline-secondary active">All</button>
+                <button class="btn btn-outline-secondary">Staff</button>
+                <button class="btn btn-outline-secondary">Customers</button>
+            </div>
+        </div>
         <div class="table-responsive">
-            <table class="table align-middle mb-0">
-                <thead class="table-light">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light text-muted small text-uppercase">
                     <tr>
-                        <th class="ps-4">User</th>
+                        <th class="ps-4">User Details</th>
+                        <th>Username</th>
                         <th>Role</th>
-                        <th>Email</th>
-                        <th>Status</th>
+                        <th>Contact</th>
                         <th class="text-end pe-4">Actions</th>
                     </tr>
                 </thead>
@@ -24,21 +77,47 @@
                     <tr>
                         <td class="ps-4">
                             <div class="d-flex align-items-center">
-                                <img src="https://ui-avatars.com/api/?name=John+Staff" class="rounded-circle me-3" width="35">
+                                <img src="https://ui-avatars.com/api/?name=Saman+Kumara&background=0077b6&color=fff" class="rounded-circle me-3" width="38">
                                 <div>
-                                    <div class="fw-bold">John Staff</div>
-                                    <small class="text-muted">Staff Account</small>
+                                    <div class="fw-bold">Saman Kumara</div>
+                                    <small class="text-muted">Joined: Jan 2026</small>
                                 </div>
                             </div>
                         </td>
-                        <td><span class="badge bg-info">STAFF</span></td>
-                        <td>john.staff@oceanview.com</td>
-                        <td><span class="text-success"><i class="fa-solid fa-circle fa-2xs me-1"></i> Active</span></td>
+                        <td><span class="text-dark fw-medium">saman_staff</span></td>
+                        <td><span class="badge bg-info-subtle text-info px-3 py-2 rounded-pill">STAFF</span></td>
+                        <td>+94 77 123 4567</td>
                         <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
-                                <i class="fa-solid fa-key"></i> Reset
+                            <button class="btn btn-sm btn-light border me-1" 
+                                    onclick="prepReset('saman_staff', 'Saman Kumara')" 
+                                    data-bs-toggle="modal" data-bs-target="#resetPasswordModal" title="Reset Password">
+                                <i class="fa-solid fa-key text-warning"></i>
                             </button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn btn-sm btn-light border text-danger">
+                                <i class="fa-solid fa-user-minus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name=Alice+Smith&background=random" class="rounded-circle me-3" width="38">
+                                <div>
+                                    <div class="fw-bold">Alice Smith</div>
+                                    <small class="text-muted">Guest</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="text-dark fw-medium">alice_88</span></td>
+                        <td><span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">CUSTOMER</span></td>
+                        <td>alice@example.com</td>
+                        <td class="text-end pe-4">
+                            <button class="btn btn-sm btn-light border me-1" onclick="prepReset('alice_88', 'Alice Smith')" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
+                                <i class="fa-solid fa-key text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm btn-light border text-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -47,7 +126,72 @@
     </div>
 </main>
 
-<%@include file="modals/add_user_modal.jsp" %>
-<%@include file="modals/reset_password_modal.jsp" %>
+<div class="modal fade" id="addStaffModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom py-3">
+                <h5 class="modal-title fw-bold">Register Staff Member</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="UserServlet" method="POST">
+                <input type="hidden" name="action" value="create_staff">
+                <div class="modal-body p-4">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Full Name</label>
+                            <input type="text" name="fullname" class="form-control" placeholder="Enter full name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Username</label>
+                            <input type="text" name="username" class="form-control" placeholder="staff_id" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Temporary Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Contact Number</label>
+                            <input type="text" name="contact" class="form-control" placeholder="+94...">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light border-0">
+                    <button type="button" class="btn btn-link text-muted text-decoration-none" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary px-4">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="resetPasswordModal" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-warning border-0">
+                <h6 class="modal-title fw-bold text-dark"><i class="fa-solid fa-shield-halved me-2"></i>Security Reset</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="UserServlet" method="POST">
+                <input type="hidden" name="action" value="reset_pass">
+                <input type="hidden" id="resetUserId" name="username">
+                <div class="modal-body text-center p-4">
+                    <p class="mb-3">Set new password for <br><strong id="resetUserName">User</strong></p>
+                    <input type="password" name="newPassword" class="form-control mb-2" placeholder="Enter new password" required>
+                    <small class="text-muted">User will need to use this to login immediately.</small>
+                </div>
+                <div class="modal-footer border-0 p-3">
+                    <button type="submit" class="btn btn-dark w-100 py-2">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function prepReset(username, fullname) {
+        document.getElementById('resetUserId').value = username;
+        document.getElementById('resetUserName').innerText = fullname;
+    }
+</script>
 
 <%@include file="../includes/footer.jsp" %>

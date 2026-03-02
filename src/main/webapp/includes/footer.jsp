@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white py-4 mt-5">
+<footer class="bg-dark text-white py-2 mt-5">
     <div class="container text-center">
         <p class="mb-0">&copy; 2026 Ocean View Resort Galle. All Rights Reserved.</p>
     </div>

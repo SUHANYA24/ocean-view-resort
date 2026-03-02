@@ -19,6 +19,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8f9fa;
+            overflow-x: hidden;
         }
 
         /* Top Admin Navbar */
@@ -74,55 +75,77 @@
             border: none;
             border-radius: 12px;
         }
+        
+        footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        main{
+            margin-top: 7vh;
+            margin-bottom: 7vh
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand admin-nav sticky-top py-2 px-4">
+<nav class="navbar navbar-expand-lg admin-nav position-fixed w-100 sticky-top py-2 px-4 shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-dark d-flex align-items-center" href="dashboard.jsp">
+        <a class="navbar-brand fw-bold text-dark d-flex align-items-center me-4" href="dashboard.jsp">
             <span class="bg-primary text-white p-2 rounded-3 me-2">
                 <i class="fa-solid fa-hotel"></i>
             </span>
-            <span class="d-none d-lg-inline">Ocean View Admin</span>
+            <span>Ocean View Admin</span>
         </a>
 
-        <form class="d-none d-sm-inline-block form-inline ms-4 me-auto my-2 my-md-0 mw-100">
-            <div class="input-group">
-                <input type="text" class="form-control search-input" placeholder="Search Reservation #..." aria-label="Search">
-                <button class="btn btn-primary rounded-end-pill" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
-        </form>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item dropdown no-arrow mx-3">
-                <a class="nav-link text-muted position-relative" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown">
-                    <i class="fas fa-bell fa-fw"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
-                        3+
-                    </span>
-                </a>
-            </li>
+        <div class="collapse navbar-collapse" id="adminNavbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium text-dark active" href="dashboard.jsp">
+                        <i class="fa-solid fa-chart-pie me-1 small text-primary"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium text-dark" href="manage-bookings.jsp">
+                        <i class="fa-solid fa-calendar-days me-1 small text-primary"></i> Bookings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium text-dark" href="manage-rooms.jsp">
+                        <i class="fa-solid fa-bed me-1 small text-primary"></i> Rooms
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium text-dark" href="manage-users.jsp">
+                        <i class="fa-solid fa-user-shield me-1 small text-primary"></i> Users
+                    </a>
+                </li>
+            </ul>
 
-            <div class="vr mx-2 text-gray-400"></div>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                    <div class="me-2 text-end d-none d-lg-block">
-                        <div class="fw-bold small text-dark"><%= session.getAttribute("username") != null ? session.getAttribute("username") : "Admin User" %></div>
-                        <div class="text-muted" style="font-size: 0.7rem;">Manager</div>
+            <div class="d-flex align-items-center">
+                <form class="me-3 d-none d-xl-block">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control border-0 bg-light" placeholder="Search Res #">
+                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
-                    <img class="user-profile-img border" src="https://ui-avatars.com/api/?name=Admin&background=0077b6&color=fff">
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0 animated--grow-in">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Profile</a></li>
-                    <li><a class="dropdown-item" href="help.jsp"><i class="fas fa-question-circle fa-sm fa-fw me-2 text-gray-400"></i> Help Center</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="../logout.jsp"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Logout</a></li>
-                </ul>
-            </li>
-        </ul>
+                </form>
+
+                <div class="dropdown">
+                    <a class="btn btn-link text-dark dropdown-toggle text-decoration-none d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                        <img class="rounded-circle me-2 border" src="https://ui-avatars.com/api/?name=Admin&background=0077b6&color=fff" width="32">
+                        <span class="small fw-bold">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2">
+                        <li><a class="dropdown-item" href="manage-profile.jsp"><i class="fa-solid fa-circle-question me-2 text-muted"></i> Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="../logout.jsp"><i class="fa-solid fa-power-off me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>

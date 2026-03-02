@@ -1,108 +1,230 @@
-<%@include file="../includes/header_admin.jsp" %> <div class="container-fluid">
-    <div class="row">
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse min-vh-100">
-            <div class="position-sticky pt-4">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-white active" href="dashboard.jsp">
-                            <i class="fa-solid fa-chart-line me-2"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="manage-bookings.jsp">
-                            <i class="fa-solid fa-calendar-check me-2"></i> Bookings
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="manage-rooms.jsp">
-                            <i class="fa-solid fa-door-open me-2"></i> Room Management
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="guests.jsp">
-                            <i class="fa-solid fa-users me-2"></i> Guest Records
-                        </a>
-                    </li>
-                    <hr class="text-secondary">
-                    <li class="nav-item">
-                        <a class="nav-link text-danger" href="../logout.jsp">
-                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<%@include file="../includes/header_admin.jsp" %>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Admin Overview</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export Report</button>
-                </div>
-            </div>
-
-            <div class="row g-4 mb-4">
-                <div class="col-md-3">
-                    <div class="card border-0 shadow-sm p-3 border-start border-primary border-5">
-                        <small class="text-muted fw-bold">TOTAL RESERVATIONS</small>
-                        <h3 class="fw-bold mt-1">128</h3>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card border-0 shadow-sm p-3 border-start border-success border-5">
-                        <small class="text-muted fw-bold">REVENUE (MARCH)</small>
-                        <h3 class="fw-bold mt-1">$12,450</h3>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card border-0 shadow-sm p-3 border-start border-warning border-5">
-                        <small class="text-muted fw-bold">ACTIVE GUESTS</small>
-                        <h3 class="fw-bold mt-1">42</h3>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card border-0 shadow-sm p-3 border-start border-info border-5">
-                        <small class="text-muted fw-bold">ROOM OCCUPANCY</small>
-                        <h3 class="fw-bold mt-1">85%</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold">Recent Reservations</h5>
-                    <a href="add-reservation.jsp" class="btn btn-primary btn-sm">+ New Booking</a>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Res ID</th>
-                                    <th>Guest Name</th>
-                                    <th>Room Type</th>
-                                    <th>Check-In</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#OV-9921</td>
-                                    <td><strong>John Doe</strong></td>
-                                    <td>Deluxe Ocean</td>
-                                    <td>2026-03-05</td>
-                                    <td><span class="badge bg-success">Confirmed</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-light border" title="Print Bill"><i class="fa-solid fa-file-invoice"></i></button>
-                                        <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </main>
+<main class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-0">Admin Overview</h2>
+            <p class="text-muted">Welcome back! Here is what's happening today.</p>
+        </div>
+        <button class="btn btn-white shadow-sm border">
+            <i class="fa-solid fa-download me-2"></i> Export Report
+        </button>
     </div>
-</div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm p-3 border-top border-primary border-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-3 me-3">
+                        <i class="fa-solid fa-clipboard-list text-primary"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted fw-bold d-block text-uppercase">Reservations</small>
+                        <h4 class="fw-bold mb-0">128</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm p-3 border-top border-success border-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-success bg-opacity-10 p-3 rounded-3 me-3">
+                        <i class="fa-solid fa-dollar-sign text-success"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted fw-bold d-block text-uppercase">Revenue</small>
+                        <h4 class="fw-bold mb-0">$12,450</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm p-3 border-top border-warning border-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-warning bg-opacity-10 p-3 rounded-3 me-3">
+                        <i class="fa-solid fa-user-check text-warning"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted fw-bold d-block text-uppercase">Active Guests</small>
+                        <h4 class="fw-bold mb-0">42</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm p-3 border-top border-info border-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-info bg-opacity-10 p-3 rounded-3 me-3">
+                        <i class="fa-solid fa-door-open text-info"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted fw-bold d-block text-uppercase">Occupancy</small>
+                        <h4 class="fw-bold mb-0">85%</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">Recent Reservations</h5>
+            <a href="add-reservation.jsp" class="btn btn-primary btn-sm rounded-pill px-3">
+                <i class="fa-solid fa-plus me-1"></i> New Booking
+            </a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">Res ID</th>
+                            <th>Guest Name</th>
+                            <th>Room Type</th>
+                            <th>Check-In</th>
+                            <th>Status</th>
+                            <th class="text-end pe-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-bold">#OV-9921</td>
+                            <td>John Doe</td>
+                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
+                            <td>March 05, 2026</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
+                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%@include file="../includes/footer.jsp" %>
