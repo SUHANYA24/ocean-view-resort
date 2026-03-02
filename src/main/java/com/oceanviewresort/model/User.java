@@ -17,13 +17,19 @@ public class User {
     private int userId;
     private String email;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String contactNumber;
     private UserRole userRole;
     
-    User(int userId,String email,String password,UserRole userRole){
+    User(int userId,String email,String password,String firstName,String lastName,String contactNumber,UserRole userRole){
         this.userId = userId;
         this.email = email;
         this.userRole=userRole;
         this.password = password;
+        this.contactNumber = contactNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
     
     User(String email,String hashedPassword,UserRole userRole){
