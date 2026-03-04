@@ -21,6 +21,9 @@ public class User {
     private String lastName;
     private String contactNumber;
     private UserRole userRole;
+
+    public User() {
+    }
     
     User(int userId,String email,String password,String firstName,String lastName,String contactNumber,UserRole userRole){
         this.userId = userId;
@@ -32,9 +35,13 @@ public class User {
         this.lastName = lastName;
     }
     
-    User(String email,String hashedPassword,UserRole userRole){
+    User(String email,String password,String firstName,String lastName,String contactNumber,UserRole userRole){
+        this.email = email;
         this.email = email;
         this.userRole=userRole;
-        this.password = hashedPassword;
+        this.password = password;
+        this.contactNumber = contactNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }
