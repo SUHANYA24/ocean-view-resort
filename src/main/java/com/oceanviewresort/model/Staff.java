@@ -9,18 +9,23 @@ package com.oceanviewresort.model;
  * @author hansa
  */
 public class Staff extends User{
-    protected int empId;
+    protected String empId;
+    
+    public Staff(){}
 
-    public Staff(int empId, int id, String email, String password) {
-        super(id, email, password);
+    public Staff(int id, String email, String password,
+                 String role, String empId) {
+
+        super(id, email, password, role);
         this.empId = empId;
     }
 
-    public int getEmpId() {
+
+    public String getEmpId() {
         return empId;
     }
 
-    public void setEmpId(int empId) {
+    public void setEmpId(String empId) {
         this.empId = empId;
     }
 }

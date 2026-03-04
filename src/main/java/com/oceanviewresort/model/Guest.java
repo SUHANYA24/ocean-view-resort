@@ -4,18 +4,20 @@
  */
 package com.oceanviewresort.model;
 
-/**
- *
- * @author hansa
- */
 public class Guest extends User{
     private String firstName;
     private String lastName;
     private String contactNumber;
     private String address;
 
-    public Guest(String firstName, String lastName, String contactNumber, String address, int id, String email, String password) {
-        super(id, email, password);
+    public Guest() {}
+
+    public Guest(int id, String email, String password,
+                 String role,
+                 String firstName, String lastName,
+                 String contactNumber, String address) {
+
+        super(id, email, password, role);
         this.firstName = firstName;
         this.lastName = lastName;
         this.contactNumber = contactNumber;

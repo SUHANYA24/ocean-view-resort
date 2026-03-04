@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author hansa
  */
-public class passwordUtil {
+public class PasswordUtil {
     public static String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

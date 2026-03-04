@@ -4,25 +4,21 @@
  */
 package com.oceanviewresort.model;
 
-/**
- *
- * @author hansa
- */
-public class Admin extends Staff{
+public class Admin extends Staff {
+
     private String adminRole;
 
-    public Admin(String adminRole, int empId, int id, String email, String password) {
-        super(empId, id, email, password);
+    public Admin() {}
+
+    public Admin(int id, String email, String password,
+                 String role, String empId, String adminRole) {
+
+        super(id, email, password, role, empId);
         this.adminRole = adminRole;
     }
 
-    public String getAdminRole() {
-        return adminRole;
-    }
-
+    public String getAdminRole() { return adminRole; }
     public void setAdminRole(String adminRole) {
         this.adminRole = adminRole;
     }
-
-    
 }

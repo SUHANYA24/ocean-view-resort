@@ -4,17 +4,22 @@
  */
 package com.oceanviewresort.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int id;
     private String email;
     private String password;
+    protected String role;
     
     public User(){};
 
-    public User(int id, String email, String password) {
+    public User(int id, String email, String password,String role) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -40,5 +45,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+
+    public boolean isAdmin() { return "ADMIN".equals(role); }
+    public boolean isStaff() { return "STAFF".equals(role); }
+    public boolean isGuest() { return "GUEST".equals(role); }
 }

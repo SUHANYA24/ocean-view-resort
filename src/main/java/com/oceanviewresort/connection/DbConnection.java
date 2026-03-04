@@ -8,10 +8,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author hansa
- */
 public class DbConnection {
     private static DbConnection instance;
     private Connection connection;
