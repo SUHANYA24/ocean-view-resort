@@ -4,44 +4,41 @@
  */
 package com.oceanviewresort.model;
 
-/**
- *
- * @author hansa
- */
-
-enum UserRole{
-    ADMIN,STAFF,CUSTOMER
-}
-
 public class User {
-    private int userId;
+    private int id;
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
-    private String contactNumber;
-    private UserRole userRole;
+    
+    public User(){};
 
-    public User() {
+    public User(int id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
-    User(int userId,String email,String password,String firstName,String lastName,String contactNumber,UserRole userRole){
-        this.userId = userId;
-        this.email = email;
-        this.userRole=userRole;
-        this.password = password;
-        this.contactNumber = contactNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-    
-    User(String email,String password,String firstName,String lastName,String contactNumber,UserRole userRole){
-        this.email = email;
-        this.email = email;
-        this.userRole=userRole;
-        this.password = password;
-        this.contactNumber = contactNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 }
