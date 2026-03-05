@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DbConnection {
     private static DbConnection instance;
     private Connection connection;
-    private String url = "jdbc:mysql://localhost:3306/oceanview?useSSL=false&serverTimezone=UTC";
+    private String url = "jdbc:mysql://localhost:3306/oceanview_db?useSSL=false&serverTimezone=UTC";
     private String username = "root"; 
     private String password = "";   
     
