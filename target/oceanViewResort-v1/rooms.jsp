@@ -19,7 +19,7 @@
             <p class="text-muted mt-2 mt-md-0">Showing 6 exclusive room types</p>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4" id="roomContainer">
             <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden room-card">
                     <div class="position-relative">
@@ -116,6 +116,9 @@
         object-fit: cover;
     }
 </style>
+
+<script src="js/roomTypes.js"></script>
+
 <script>
     function handleBooking(roomType) {
     // Check if a session variable 'user' exists (Logic for JSP)

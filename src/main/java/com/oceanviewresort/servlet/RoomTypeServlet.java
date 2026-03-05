@@ -4,6 +4,7 @@
  */
 package com.oceanviewresort.servlet;
 
+import com.google.gson.Gson;
 import com.oceanviewresort.dao.RoomTypeDAO;
 import com.oceanviewresort.model.RoomType;
 
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet("/roomType")
 public class RoomTypeServlet extends HttpServlet {
@@ -24,8 +27,35 @@ public class RoomTypeServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String id = request.getParameter("id");
+
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+
+        Gson gson = new Gson();
+
+        // GET single room type
+        if (id != null) {
+
+            RoomType roomType = dao.getRoomTypeById(Integer.parseInt(id));
+            out.print(gson.toJson(roomType));
+
+        } // GET all room types
+        else {
+
+            List<RoomType> roomTypes = dao.getAllRoomTypes();
+            out.print(gson.toJson(roomTypes));
+
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
+            HttpServletResponse response)
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
@@ -41,7 +71,7 @@ public class RoomTypeServlet extends HttpServlet {
 
     // ADD
     private void addRoomType(HttpServletRequest request,
-                             HttpServletResponse response)
+            HttpServletResponse response)
             throws IOException {
 
         RoomType roomType = new RoomType(
@@ -57,7 +87,7 @@ public class RoomTypeServlet extends HttpServlet {
 
     // UPDATE
     private void updateRoomType(HttpServletRequest request,
-                                HttpServletResponse response)
+            HttpServletResponse response)
             throws IOException {
 
         RoomType roomType = new RoomType(
@@ -73,7 +103,7 @@ public class RoomTypeServlet extends HttpServlet {
 
     // DELETE
     private void deleteRoomType(HttpServletRequest request,
-                                HttpServletResponse response)
+            HttpServletResponse response)
             throws IOException {
 
         int id = Integer.parseInt(request.getParameter("id"));
