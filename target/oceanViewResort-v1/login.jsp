@@ -18,22 +18,14 @@
                             </div>
                         <% } %>
 
-                        <form action="LoginServlet" method="POST">
+                        <form action="login" method="POST">
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Username</label>
-                                <input type="text" name="username" class="form-control p-3" placeholder="Enter username" required>
+                                <label class="form-label fw-semibold">Email</label>
+                                <input type="text" name="email" class="form-control p-3" placeholder="Enter username" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Password</label>
                                 <input type="password" name="password" class="form-control p-3" placeholder="????????" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label fw-semibold">I am a...</label>
-                                <select name="role" class="form-select p-3">
-                                    <option value="CUSTOMER">Guest / Customer</option>
-                                    <option value="STAFF">Hotel Staff</option>
-                                    <option value="ADMIN">System Administrator</option>
-                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3">Sign In</button>
                         </form>

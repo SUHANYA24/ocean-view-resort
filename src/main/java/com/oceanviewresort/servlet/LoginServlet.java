@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        System.err.println("hello");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 
             if (user.isAdmin()) response.sendRedirect("adminDashboard.jsp");
             else if (user.isStaff()) response.sendRedirect("staffDashboard.jsp");
-            else response.sendRedirect("guestDashboard.jsp");
+            else response.sendRedirect("index.jsp");
         } else {
             request.setAttribute("error", "Invalid Credentials");
             request.getRequestDispatcher("login.jsp").forward(request, response);
