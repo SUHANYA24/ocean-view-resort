@@ -25,30 +25,34 @@ public class RoomBookingDAO {
     // =========================
     // CHECK AVAILABILITY
     // =========================
-    public boolean isRoomAvailable(int roomId, java.util.Date checkIn, java.util.Date checkOut) {
+    public List<Room> getAvailableRooms(int roomTypeId, java.util.Date checkIn, java.util.Date checkOut) throws SQLException {
+        List<Room> availableRooms = new ArrayList<>();
 
-        String sql = "SELECT COUNT(*) FROM room_bookings "
-                + "WHERE room_id=? "
-                + "AND check_in < ? "
-                + "AND check_out > ?";
+        String sql = "SELECT r.room_id, r.room_number, r.room_type_id "
+            +"FROM rooms r "+
+            " WHERE r.room_type_id = ? "+
+              "AND r.room_id NOT IN ("+
+                  "SELECT b.room_id "+
+                  "FROM room_bookings b "+
+                  "WHERE NOT (b.check_out <= ? OR b.check_in >= ?))"
+              ;
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, roomId);
-            ps.setDate(2, new java.sql.Date(checkOut.getTime()));
-            ps.setDate(3, new java.sql.Date(checkIn.getTime()));
+            ps.setInt(1, roomTypeId);
+            ps.setDate(2, new java.sql.Date(checkIn.getTime()));
+            ps.setDate(3, new java.sql.Date(checkOut.getTime()));
 
             ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt(1) == 0;
+            while(rs.next()) {
+                Room room = new Room();
+                room.setRoomId(rs.getInt("room_id"));
+                room.setRoomNumber(rs.getString("room_number"));
+                // You can also load RoomType if needed
+                availableRooms.add(room);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-        return false;
+        return availableRooms;
     }
 
     // =========================

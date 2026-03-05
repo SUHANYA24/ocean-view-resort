@@ -56,5 +56,7 @@ public class Guest extends User{
         this.address = address;
     }
     
-    
+    public String getFullName(){
+        return firstName + " "+lastName;
+    }
 }

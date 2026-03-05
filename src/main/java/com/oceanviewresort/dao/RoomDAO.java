@@ -87,16 +87,16 @@ public class RoomDAO {
     // =========================
     // GET BY ID
     // =========================
-    public Room getRoomById(int id) {
+    public Room getRoomByNumber(String num) {
 
         String sql = "SELECT r.*, rt.room_type, rt.price_per_night, rt.image_url "
                 + "FROM rooms r "
                 + "JOIN room_types rt ON r.room_type_id = rt.room_type_id "
-                + "WHERE r.room_id=?";
+                + "WHERE r.room_number=?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setString(1, num);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

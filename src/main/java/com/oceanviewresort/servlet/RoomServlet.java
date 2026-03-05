@@ -4,6 +4,7 @@
  */
 package com.oceanviewresort.servlet;
 
+import com.google.gson.Gson;
 import com.oceanviewresort.dao.RoomDAO;
 import com.oceanviewresort.model.Room;
 import com.oceanviewresort.model.RoomType;
@@ -13,6 +14,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet("/room")
 public class RoomServlet extends HttpServlet {
@@ -22,6 +25,32 @@ public class RoomServlet extends HttpServlet {
     @Override
     public void init() {
         dao = new RoomDAO();
+    }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String roomNumber = request.getParameter("rnum");
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+         if (roomNumber != null) {
+
+            Room room = dao.getRoomByNumber(roomNumber);
+            if (room == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                out.print("{\"error\":\"Room type not found\"}");
+            } else {
+                out.print(gson.toJson(room));
+            }
+
+        } // GET all room types
+        else {
+
+            List<Room> rooms = dao.getAllRooms();
+            out.print(gson.toJson(rooms));
+
+        }
     }
 
     @Override
