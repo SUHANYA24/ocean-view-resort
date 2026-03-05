@@ -47,13 +47,13 @@ public class RoomTypeDAO {
     // =========================
     // GET BY ID
     // =========================
-    public RoomType getRoomTypeById(int id) {
+    public RoomType getRoomTypeById(String name) {
 
-        String sql = "SELECT * FROM room_types WHERE room_type_id=?";
+        String sql = "SELECT * FROM room_types WHERE room_type=?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

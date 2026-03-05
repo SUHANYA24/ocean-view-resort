@@ -31,18 +31,23 @@ public class RoomTypeServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = request.getParameter("id");
+        String name = request.getParameter("type");
 
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
         Gson gson = new Gson();
-
+        
         // GET single room type
-        if (id != null) {
+        if (name != null) {
 
-            RoomType roomType = dao.getRoomTypeById(Integer.parseInt(id));
-            out.print(gson.toJson(roomType));
+            RoomType roomType = dao.getRoomTypeById(name);
+            if (roomType == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                out.print("{\"error\":\"Room type not found\"}");
+            } else {
+                out.print(gson.toJson(roomType));
+            }
 
         } // GET all room types
         else {

@@ -1,7 +1,7 @@
 // roomTypes.js
 
 async function loadRoomTypes() {
-    console.log("hello worlds")
+    console.log("hello worlds");
     try {
         // 1. Fetch data from servlet API
         const response = await fetch("roomType?action=list");
@@ -46,7 +46,7 @@ async function loadRoomTypes() {
                                 <span class="fs-4 fw-bold text-dark">$${room.pricePerNight}</span>
                                 <span class="text-muted small">/ night</span>
                             </div>
-                           <button onclick="handleBooking('Deluxe')" class="btn btn-primary rounded-pill">Book Now</button>
+                           <button onclick="handleBooking('${room.roomType}')" class="btn btn-primary rounded-pill">Book Now</button>
                         </div>
                     </div>
                 </div>

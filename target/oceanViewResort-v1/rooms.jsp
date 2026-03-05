@@ -123,10 +123,16 @@
     function handleBooking(roomType) {
     // Check if a session variable 'user' exists (Logic for JSP)
     // For this example, we'll assume the JSP sets a JS variable
-    var isLoggedIn = <%= (session.getAttribute("user") != null) %>;
-
+<%
+    boolean result =false;
+    if(user != null && user instanceof Guest){
+        result = true;
+    }
+%>
+    var isLoggedIn = <%= result %>;
+    alert(isLoggedIn);
     if (isLoggedIn) {
-        window.location.href = "booking-form.jsp?type=" + roomType;
+        window.location.href = "room-details.jsp?type=" + roomType;
     } else {
         window.location.href = "login.jsp?msg=Please login to complete your " + roomType + " reservation.";
     }

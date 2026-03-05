@@ -4,7 +4,7 @@
     <div class="container text-center">
         <h1 class="display-2 fw-bold mb-3 animate__animated animate__fadeInDown">Your Paradise in Galle</h1>
         <p class="lead mb-5 fs-4 opacity-90">Experience luxury by the shore. Hundreds of guests trust our sanctuary every month.</p>
-        <a href="#booking" class="btn btn-lg btn-light px-5 py-3 fw-bold rounded-pill shadow">Explore Rooms</a>
+        <a href="rooms.jsp" class="btn btn-lg btn-light px-5 py-3 fw-bold rounded-pill shadow">Explore Rooms</a>
     </div>
 </header>
 
