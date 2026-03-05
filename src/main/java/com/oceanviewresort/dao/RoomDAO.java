@@ -4,6 +4,7 @@
  */
 package com.oceanviewresort.dao;
 
+import com.oceanviewresort.connection.DbConnection;
 import com.oceanviewresort.model.Room;
 import com.oceanviewresort.model.RoomType;
 
@@ -16,7 +17,11 @@ public class RoomDAO {
     private Connection connection;
 
     public RoomDAO() {
-        connection = DBConnection.getConnection();
+        try {
+            connection = DbConnection.getInstance().getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // =========================

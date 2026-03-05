@@ -8,10 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- *
- * @author hansa
- */
 public class PasswordUtil {
     public static String hashPassword(String password) {
         try {

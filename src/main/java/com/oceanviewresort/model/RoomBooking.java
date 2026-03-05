@@ -93,7 +93,11 @@ public class RoomBooking {
         this.createAt = createAt;
     }
 
-    public double calculateRoomChargers(){
-        return room.getRoomType().getPricePerNight() * 2;
-    }
+    public double calculateRoomCharges() {
+
+    long diff = checkOut.getTime() - checkIn.getTime();
+    long days = diff / (1000 * 60 * 60 * 24);
+
+    return room.getRoomType().getPricePerNight() * days;
+}
 }
