@@ -59,7 +59,7 @@ public class RoomBookingDAO {
     // ADD BOOKING
     // =========================
     public boolean addBooking(RoomBooking booking) {
-
+        
         String sql = "INSERT INTO room_bookings "
                 + "(booking_type, guest_name, guest_contact_number, room_id, "
                 + "check_in, check_out, customer_id, is_make_payment, "
@@ -69,9 +69,9 @@ public class RoomBookingDAO {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             if (booking instanceof OnlineBooking) {
-
+                
                 OnlineBooking ob = (OnlineBooking) booking;
-
+                System.out.println(ob.getCustomer().getEmail());
                 ps.setString(1, "ONLINE");
                 ps.setString(2, ob.getGuestName());
                 ps.setString(3, ob.getGuestContactNumber());
@@ -80,7 +80,7 @@ public class RoomBookingDAO {
                 ps.setDate(6, new java.sql.Date(ob.getCheckOut().getTime()));
                 ps.setInt(7, ob.getCustomer().getId());
                 ps.setBoolean(8, ob.isIsMakePayment());
-                ps.setNull(9, Types.INTEGER);
+                ps.setInt(9, ob.getCustomer().getId());
                 ps.setNull(10, Types.INTEGER);
 
             } else if (booking instanceof WalkInBooking) {
@@ -95,7 +95,7 @@ public class RoomBookingDAO {
                 ps.setDate(6, new java.sql.Date(wb.getCheckOut().getTime()));
                 ps.setNull(7, Types.INTEGER);
                 ps.setNull(8, Types.BOOLEAN);
-                ps.setInt(9, wb.getGuestDetails().getId());
+                ps.setInt(9, Types.INTEGER);
                 ps.setInt(10, wb.getCreateBy().getId());
             }
 
@@ -130,7 +130,8 @@ public class RoomBookingDAO {
 
                     User customer = new User();
                     customer.setId(rs.getInt("customer_id"));
-
+                    Timestamp timestamp = rs.getTimestamp("created_at");
+                    
                     OnlineBooking ob = new OnlineBooking(
                             customer,
                             rs.getBoolean("is_make_payment"),
@@ -139,7 +140,7 @@ public class RoomBookingDAO {
                             room,
                             rs.getDate("check_in"),
                             rs.getDate("check_out"),
-                            rs.getTimestamp("created_at")
+                            timestamp.toLocalDateTime()
                     );
 
                     ob.setRoomBookingId(rs.getInt("room_booking_id"));
@@ -152,9 +153,8 @@ public class RoomBookingDAO {
 
                     User createdBy = new User();
                     createdBy.setId(rs.getInt("created_by"));
-
+                    Timestamp timestamp = rs.getTimestamp("created_at");
                     WalkInBooking wb = new WalkInBooking(
-                            guestUser,
                             createdBy,
                             rs.getInt("room_booking_id"),
                             rs.getString("guest_name"),
@@ -162,7 +162,7 @@ public class RoomBookingDAO {
                             room,
                             rs.getDate("check_in"),
                             rs.getDate("check_out"),
-                            rs.getTimestamp("created_at")
+                            timestamp.toLocalDateTime()
                     );
 
                     list.add(wb);

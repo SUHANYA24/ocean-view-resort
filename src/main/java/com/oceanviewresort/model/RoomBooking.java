@@ -4,6 +4,7 @@
  */
 package com.oceanviewresort.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class RoomBooking {
@@ -13,12 +14,12 @@ public class RoomBooking {
     private Room room;
     private Date checkIn;
     private Date checkOut;
-    private Date createAt;
+    private LocalDateTime  createAt;
 
     public RoomBooking() {
     }
     
-    public RoomBooking(int roomBookingId, String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, Date createAt) {
+    public RoomBooking(int roomBookingId, String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, LocalDateTime  createAt) {
         this.roomBookingId = roomBookingId;
         this.guestName = guestName;
         this.guestContactNumber = guestContactNumber;
@@ -28,7 +29,7 @@ public class RoomBooking {
         this.createAt = createAt;
     }
 
-    public RoomBooking(String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, Date createAt) {
+    public RoomBooking(String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, LocalDateTime  createAt) {
         this.guestName = guestName;
         this.guestContactNumber = guestContactNumber;
         this.room = room;
@@ -85,11 +86,11 @@ public class RoomBooking {
         this.checkOut = checkOut;
     }
 
-    public Date getCreateAt() {
+    public LocalDateTime  getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(LocalDateTime  createAt) {
         this.createAt = createAt;
     }
 

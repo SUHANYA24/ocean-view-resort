@@ -4,6 +4,7 @@
  */
 package com.oceanviewresort.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ public class OnlineBooking extends RoomBooking {
     private User customer;
     private boolean isMakePayment;
 
-    public OnlineBooking(User customer, boolean isMakePayment, String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, Date createAt) {
+    public OnlineBooking(User customer, boolean isMakePayment, String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, LocalDateTime  createAt) {
         super(guestName, guestContactNumber, room, checkIn, checkOut, createAt);
         this.customer = customer;
         this.isMakePayment = isMakePayment;

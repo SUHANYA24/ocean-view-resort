@@ -12,6 +12,7 @@ fetch(`room?rnum=${encodeURIComponent(rnum)}`)
                 document.getElementById('pricePerNight').innerText = "$" + data.roomType.pricePerNight;
                 document.getElementById('roomType').innerText = data.roomType.roomType;
                 document.getElementById('pricePerNightValue').value = data.roomType.pricePerNight;
+                document.getElementById('roomId').value = data.roomId;
                 updateSummary();
             }
         })

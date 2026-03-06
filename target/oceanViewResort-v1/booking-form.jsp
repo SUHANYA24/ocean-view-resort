@@ -14,14 +14,27 @@
     String checkIn = request.getParameter("in");
     String checkOut = request.getParameter("out");
 %>
+<%
+String error = request.getParameter("error");
 
+if("room_not_available".equals(error)){
+%>
+<div class="alert alert-danger">
+    Room not available for selected dates
+</div>
+<%
+}
+%>
 <div class="container py-5 mt-5">
     <div class="row g-5">
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
                 <h3 class="fw-bold mb-4">Guest Information</h3>
-                <form action="confirm-booking.jsp" method="POST" id="finalBookingForm">
+                <form action="booking" method="POST" id="finalBookingForm">
+                    <input type="hidden" name="action" value="add">
+                    <input type="hidden" name="bookingType" value="ONLINE">
                     <input type="hidden" name="roomNum" value="<%= roomNum %>">
+                    <input type="hidden" name="roomId" id="roomId">
                     <input type="hidden" name="totalAmount" id="hiddenTotal">
                     <input type="hidden" id="pricePerNightValue">
 
@@ -30,7 +43,7 @@
                                placeholder="e.g. John Doe" required
                                value="<%= guestName %>">
 
-                        <input type="tel" name="guestPhone" class="form-control bg-light border-0 py-2"
+                        <input type="tel" name="contact" class="form-control bg-light border-0 py-2"
                                placeholder="e.g. +94 77 123 4567" required
                                value="<%= guestPhone %>">
 
@@ -87,7 +100,7 @@
                         <span class="text-muted">Rate per night</span>
                         <span class="fw-bold" id="pricePerNight"></span>
                     </div>
-                    
+
                     <div id="summaryLogic" class="d-none">
                         <div class="list-group-item px-0 border-0 d-flex justify-content-between">
                             <span class="text-muted">Stay Duration</span>

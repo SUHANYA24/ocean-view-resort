@@ -4,6 +4,7 @@
  */
 package com.oceanviewresort.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -11,25 +12,14 @@ import java.util.Date;
  * @author hansa
  */
 public class WalkInBooking extends RoomBooking {
-    private User guestDetails;
     private User createBy;
 
     public WalkInBooking() {
     }
 
-    public WalkInBooking(User guestDetails, User createBy, int roomBookingId, String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, Date createAt) {
+    public WalkInBooking(User createBy, int roomBookingId, String guestName, String guestContactNumber, Room room, Date checkIn, Date checkOut, LocalDateTime createAt) {
         super(roomBookingId, guestName, guestContactNumber, room, checkIn, checkOut, createAt);
-        this.guestDetails = guestDetails;
         this.createBy = createBy;
-    }
-    
-
-    public User getGuestDetails() {
-        return guestDetails;
-    }
-
-    public void setGuestDetails(User guestDetails) {
-        this.guestDetails = guestDetails;
     }
 
     public User getCreateBy() {
