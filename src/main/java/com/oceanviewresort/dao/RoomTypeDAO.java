@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.oceanviewresort.dao;
 
 import com.oceanviewresort.connection.DbConnection;
@@ -12,7 +8,7 @@ import java.util.List;
 
 public class RoomTypeDAO {
 
-    private Connection connection;
+    Connection connection;
 
     public RoomTypeDAO() {
         try {

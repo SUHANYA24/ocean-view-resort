@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RoomDAO {
 
-    private Connection connection;
+    Connection connection;
 
     public RoomDAO() {
         try {

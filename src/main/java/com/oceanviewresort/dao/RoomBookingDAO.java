@@ -13,7 +13,7 @@ import java.util.*;
 
 public class RoomBookingDAO {
 
-    private Connection connection;
+    Connection connection;
 
     public RoomBookingDAO() {
         try {

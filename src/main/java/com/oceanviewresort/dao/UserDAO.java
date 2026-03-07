@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserDAO {
 
-    private Connection connection;
+    Connection connection;
 
     public UserDAO() {
         try {

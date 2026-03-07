@@ -13,6 +13,10 @@ public class LoginServlet extends HttpServlet {
 
     private UserDAO userDAO;
 
+    void setUserDAO(UserDAO dao) {
+        this.userDAO = dao;
+    }
+    
     @Override
     public void init() {
         userDAO = new UserDAO();
