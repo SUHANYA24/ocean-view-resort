@@ -1,8 +1,9 @@
+<%@ page import="java.util.*" %>
 <%@ page import="com.oceanviewresort.model.*" %>
 <%
     Object loggedUser = session.getAttribute("loggedUser");
 
-    if (loggedUser == null || !(loggedUser instanceof StFF)) {
+    if (loggedUser == null || !(loggedUser instanceof Staff)) {
         response.sendRedirect("../login.jsp");
         return;
     }
@@ -19,6 +20,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     
     <style>
         :root {
@@ -111,13 +113,10 @@
         <div class="collapse navbar-collapse" id="staffNavbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-medium text-dark active" href="dashboard.jsp">Dashboard</a>
+                    <a class="nav-link px-3 fw-medium text-dark active" href="dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-medium text-dark" href="bookings.jsp">Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3 fw-medium text-dark" href="room-status.jsp">Housekeeping</a>
+                    <a class="nav-link px-3 fw-medium text-dark" href="bookings">Reservations</a>
                 </li>
             </ul>
 
@@ -127,9 +126,9 @@
                     <span class="small fw-bold">Front Desk</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2">
-                    <li><a class="dropdown-item" href="manage-profile.jsp">My Profile</a></li>
+                    <li><a class="dropdown-item" href="manage-profile">My Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="../logout.jsp">Logout</a></li>
+                    <li><a class="dropdown-item text-danger" href="<%=request.getContextPath()%>/logout">Logout</a></li>
                 </ul>
             </div>
         </div>

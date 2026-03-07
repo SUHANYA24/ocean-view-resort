@@ -1,3 +1,4 @@
+package com.oceanviewresort.servlet;
 import com.oceanviewresort.dao.UserDAO;
 import com.oceanviewresort.model.User;
 

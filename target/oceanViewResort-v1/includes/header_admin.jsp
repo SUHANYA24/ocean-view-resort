@@ -155,7 +155,7 @@
                     <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2">
                         <li><a class="dropdown-item" href="manage-profile.jsp"><i class="fa-solid fa-circle-question me-2 text-muted"></i> Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="../logout.jsp"><i class="fa-solid fa-power-off me-2"></i> Logout</a></li>
+                        <li><a class="dropdown-item text-danger" href="<%=request.getContextPath()%>/logout"><i class="fa-solid fa-power-off me-2"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>

@@ -7,6 +7,7 @@ package com.oceanviewresort.dao;
 import com.oceanviewresort.connection.DbConnection;
 import com.oceanviewresort.model.*;
 import java.sql.*;
+import java.time.LocalDate;
 
 import java.util.*;
 
@@ -29,13 +30,12 @@ public class RoomBookingDAO {
         List<Room> availableRooms = new ArrayList<>();
 
         String sql = "SELECT r.room_id, r.room_number, r.room_type_id "
-            +"FROM rooms r "+
-            " WHERE r.room_type_id = ? "+
-              "AND r.room_id NOT IN ("+
-                  "SELECT b.room_id "+
-                  "FROM room_bookings b "+
-                  "WHERE NOT (b.check_out <= ? OR b.check_in >= ?))"
-              ;
+                + "FROM rooms r "
+                + " WHERE r.room_type_id = ? "
+                + "AND r.room_id NOT IN ("
+                + "SELECT b.room_id "
+                + "FROM room_bookings b "
+                + "WHERE NOT (b.check_out <= ? OR b.check_in >= ?))";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -44,7 +44,7 @@ public class RoomBookingDAO {
             ps.setDate(3, new java.sql.Date(checkOut.getTime()));
 
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Room room = new Room();
                 room.setRoomId(rs.getInt("room_id"));
                 room.setRoomNumber(rs.getString("room_number"));
@@ -59,7 +59,7 @@ public class RoomBookingDAO {
     // ADD BOOKING
     // =========================
     public boolean addBooking(RoomBooking booking) {
-        
+
         String sql = "INSERT INTO room_bookings "
                 + "(booking_type, guest_name, guest_contact_number, room_id, "
                 + "check_in, check_out, customer_id, is_make_payment, "
@@ -69,7 +69,7 @@ public class RoomBookingDAO {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             if (booking instanceof OnlineBooking) {
-                
+
                 OnlineBooking ob = (OnlineBooking) booking;
                 System.out.println(ob.getCustomer().getEmail());
                 ps.setString(1, "ONLINE");
@@ -132,7 +132,7 @@ public class RoomBookingDAO {
                     User customer = new User();
                     customer.setId(rs.getInt("customer_id"));
                     Timestamp timestamp = rs.getTimestamp("created_at");
-                    
+
                     OnlineBooking ob = new OnlineBooking(
                             customer,
                             rs.getBoolean("is_make_payment"),
@@ -171,6 +171,122 @@ public class RoomBookingDAO {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public int countArrivals(LocalDate today) {
+
+        int count = 0;
+
+        String sql = "SELECT COUNT(*) FROM room_bookings WHERE check_in = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setDate(1, java.sql.Date.valueOf(today));
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    public int countDepartures(LocalDate today) {
+
+        int count = 0;
+
+        String sql = "SELECT COUNT(*) FROM room_bookings WHERE check_out = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setDate(1, java.sql.Date.valueOf(today));
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    public List<RoomBooking> getActiveBookings() {
+
+        List<RoomBooking> list = new ArrayList<>();
+
+        String sql = "SELECT rb.*, r.room_number "
+                + "FROM room_bookings rb "
+                + "JOIN rooms r ON r.room_id = rb.room_id "
+                + "WHERE CURDATE() BETWEEN rb.check_in AND rb.check_out";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
+                String type = rs.getString("booking_type");
+
+                Room room = new Room();
+                room.setRoomId(rs.getInt("room_id"));
+                room.setRoomNumber(rs.getString("room_number"));
+
+                if ("ONLINE".equals(type)) {
+
+                    User customer = new User();
+                    customer.setId(rs.getInt("customer_id"));
+
+                    Timestamp timestamp = rs.getTimestamp("created_at");
+
+                    OnlineBooking ob = new OnlineBooking(
+                            customer,
+                            rs.getBoolean("is_make_payment"),
+                            rs.getString("guest_name"),
+                            rs.getString("guest_contact_number"),
+                            room,
+                            rs.getDate("check_in"),
+                            rs.getDate("check_out"),
+                            timestamp.toLocalDateTime()
+                    );
+
+                    ob.setRoomBookingId(rs.getInt("room_booking_id"));
+
+                    list.add(ob);
+
+                } else if ("WALKIN".equals(type)) {
+
+                    User createdBy = new User();
+                    createdBy.setId(rs.getInt("created_by"));
+
+                    Timestamp timestamp = rs.getTimestamp("created_at");
+
+                    WalkInBooking wb = new WalkInBooking(
+                            createdBy,
+                            rs.getInt("room_booking_id"),
+                            rs.getString("guest_name"),
+                            rs.getString("guest_contact_number"),
+                            room,
+                            rs.getDate("check_in"),
+                            rs.getDate("check_out"),
+                            timestamp.toLocalDateTime()
+                    );
+
+                    list.add(wb);
+                }
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

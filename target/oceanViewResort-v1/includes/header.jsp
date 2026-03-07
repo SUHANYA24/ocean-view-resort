@@ -69,7 +69,7 @@
                                     } else if(user instanceof Staff || user instanceof Admin) {
                             %>
                         <li class="nav-item"><a class="nav-link px-3" href="adminDashboard.jsp">Panel</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" href="login?logout=true">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="<%=request.getContextPath()%>/logout">Logout</a></li>
                             <%
                                     }
                                 } else {

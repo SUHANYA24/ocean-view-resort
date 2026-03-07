@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("loggedUser", user);
 
             if (user.isAdmin()) response.sendRedirect("admin/dashboard");
-            else if (user.isStaff()) response.sendRedirect("staffDashboard.jsp");
+            else if (user.isStaff()) response.sendRedirect("staff/dashboard");
             else response.sendRedirect("index.jsp");
         } else {
             request.setAttribute("error", "Invalid Credentials");

@@ -51,42 +51,119 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <%
+                    List<RoomBooking> bookings = (List<RoomBooking>) request.getAttribute("bookings");
+
+                    if(bookings != null){
+                    for(RoomBooking b : bookings){
+
+                    java.util.Date today = new java.util.Date();
+
+                    String status = "Pending Arrival";
+
+                    if(today.after(b.getCheckIn()) && today.before(b.getCheckOut())){
+                        status = "In-House";
+                    }else if(today.after(b.getCheckOut())){
+                        status = "Completed";
+                    }
+                    %>
+
                     <tr>
+
                         <td class="ps-4">
-                            <span class="badge bg-warning text-dark rounded-pill px-3">Pending Arrival</span>
+
+                            <%
+                            if(status.equals("Pending Arrival")){
+                            %>
+                            <span class="badge bg-warning text-dark rounded-pill px-3">
+                                Pending Arrival
+                            </span>
+                            <%
+                            }else if(status.equals("In-House")){
+                            %>
+                            <span class="badge bg-success-subtle text-success rounded-pill px-3">
+                                In-House
+                            </span>
+                            <%
+                            }else{
+                            %>
+                            <span class="badge bg-secondary rounded-pill px-3">
+                                Completed
+                            </span>
+                            <%
+                            }
+                            %>
+
                         </td>
-                        <td class="fw-bold text-muted">#BK-8810</td>
+
+                        <td class="fw-bold text-muted">
+                            #BK-<%= b.getRoomBookingId() %>
+                        </td>
+
                         <td>
-                            <div class="fw-bold">Kasun Perera</div>
-                            <small class="text-muted">+94 71 000 0000</small>
+                            <div class="fw-bold"><%= b.getGuestName() %></div>
+                            <small class="text-muted"><%= b.getGuestContactNumber() %></small>
                         </td>
-                        <td><span class="badge bg-light text-dark border">Room 302</span></td>
-                        <td><small>Mar 02 - Mar 04</small></td>
-                        <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-success px-3 me-1">Check In</button>
-                            <button class="btn btn-sm btn-light border" onclick="viewDetails('BK-8810')"><i class="fa-solid fa-eye"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ps-4">
-                            <span class="badge bg-success-subtle text-success rounded-pill px-3">In-House</span>
-                        </td>
-                        <td class="fw-bold text-muted">#BK-8805</td>
+
                         <td>
-                            <div class="fw-bold">Sarah Jenkins</div>
-                            <small class="text-muted">sarah.j@email.com</small>
+                            <span class="badge bg-light text-dark border">
+                                Room <%= b.getRoom().getRoomNumber() %>
+                            </span>
                         </td>
-                        <td><span class="badge bg-light text-dark border">Room 105</span></td>
-                        <td><small>Feb 28 - Mar 03</small></td>
+
+                        <td>
+                            <small>
+                                <%= b.getCheckIn() %> - <%= b.getCheckOut() %>
+                            </small>
+                        </td>
+
                         <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-primary me-1" 
-                                    onclick="prepBill('BK-8805', 'Sarah Jenkins', 'Deluxe', 3, 150.00)" 
-                                    data-bs-toggle="modal" data-bs-target="#staffBillModal">
-                                <i class="fa-solid fa-print me-1"></i> Print Bill
+
+                            <%
+                            if(status.equals("Pending Arrival")){
+                            %>
+
+                            <button class="btn btn-sm btn-success px-3 me-1">
+                                Check In
                             </button>
-                            <button class="btn btn-sm btn-outline-danger">Check Out</button>
+
+                            <%
+                            }else if(status.equals("In-House")){
+                            %>
+
+                            <button class="btn btn-sm btn-primary me-1"
+                                    onclick="prepBill(
+                '<%= b.getRoomBookingId() %>',
+                '<%= b.getGuestName() %>',
+                'Room',
+                1,
+                150
+                )"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#staffBillModal">
+
+                                <i class="fa-solid fa-print me-1"></i> Print Bill
+
+                            </button>
+
+                            <button class="btn btn-sm btn-outline-danger">
+                                Check Out
+                            </button>
+
+                            <%
+                            }
+                            %>
+
                         </td>
+
                     </tr>
+
+                    <%
+                    }
+                    }
+                    %>
+
                 </tbody>
             </table>
         </div>
@@ -149,9 +226,18 @@
 
 <style>
     @media print {
-        body * { visibility: hidden; }
-        #printableArea, #printableArea * { visibility: visible; }
-        #printableArea { position: absolute; left: 0; top: 0; width: 100%; }
+        body * {
+            visibility: hidden;
+        }
+        #printableArea, #printableArea * {
+            visibility: visible;
+        }
+        #printableArea {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
     }
 </style>
 
