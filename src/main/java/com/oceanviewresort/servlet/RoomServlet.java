@@ -83,7 +83,7 @@ public class RoomServlet extends HttpServlet {
         );
 
         dao.addRoom(room);
-        response.sendRedirect("roomList.jsp");
+        response.sendRedirect("admin/manage-rooms");
     }
 
     private void updateRoom(HttpServletRequest request,
@@ -100,7 +100,7 @@ public class RoomServlet extends HttpServlet {
         );
 
         dao.updateRoom(room);
-        response.sendRedirect("roomList.jsp");
+        response.sendRedirect("admin/manage-rooms");
     }
 
     private void deleteRoom(HttpServletRequest request,
@@ -109,6 +109,6 @@ public class RoomServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         dao.deleteRoom(id);
-        response.sendRedirect("roomList.jsp");
+        response.sendRedirect("admin/manage-rooms");
     }
 }

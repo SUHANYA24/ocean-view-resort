@@ -1,5 +1,16 @@
 <%@include file="../includes/header_admin.jsp" %>
-
+<%
+List<RoomBooking> bookings = (List<RoomBooking>) request.getAttribute("availablebookings");
+if (bookings != null) {
+%>
+    <p style="color:green;">Total Bookings: <%= bookings.size() %></p>
+<%
+} else {
+%>
+    <p style="color:red;">Bookings list is NULL</p>
+<%
+}
+%>
 <main class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -80,146 +91,42 @@
                         <tr>
                             <th class="ps-4">Res ID</th>
                             <th>Guest Name</th>
-                            <th>Room Type</th>
+                            <th>Room Number</th>
                             <th>Check-In</th>
                             <th>Status</th>
                             <th class="text-end pe-4">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <%
+                        if(bookings != null){
+                            for(RoomBooking b : bookings){
+                        %>
+
                         <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
+                            <td class="ps-4 fw-bold">#OV-<%= b.getRoomBookingId() %></td>
+                            <td><%= b.getGuestName() %></td>
+                            <td>
+                                <span class="badge bg-light text-dark border">
+                                    <%= b.getRoom().getRoomNumber() %>
+                                </span>
+                            </td>
+                            <td><%= b.getCheckIn() %></td>
                             <td><span class="badge bg-success">Confirmed</span></td>
                             <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn btn-sm btn-light border text-primary me-1">
+                                    <i class="fa-solid fa-file-invoice"></i>
+                                </button>
+                                <button class="btn btn-sm btn-light border text-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-bold">#OV-9921</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-light text-dark border">Deluxe Ocean</span></td>
-                            <td>March 05, 2026</td>
-                            <td><span class="badge bg-success">Confirmed</span></td>
-                            <td class="text-end pe-4">
-                                <button class="btn btn-sm btn-light border text-primary me-1"><i class="fa-solid fa-file-invoice"></i></button>
-                                <button class="btn btn-sm btn-light border text-danger"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        
+
+                        <%
+                            }
+                        }
+                        %>
                     </tbody>
                 </table>
             </div>

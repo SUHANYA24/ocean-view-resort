@@ -20,7 +20,7 @@
                     </div>
                     <div>
                         <small class="text-muted fw-bold d-block">ADMINS</small>
-                        <h5 class="fw-bold mb-0">2</h5>
+                        <h5 class="fw-bold mb-0"><%= request.getAttribute("adminCount") %></h5>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     </div>
                     <div>
                         <small class="text-muted fw-bold d-block">STAFF MEMBERS</small>
-                        <h5 class="fw-bold mb-0">12</h5>
+                        <h5 class="fw-bold mb-0"><%= request.getAttribute("staffCount") %></h5>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div>
                         <small class="text-muted fw-bold d-block">CUSTOMERS</small>
-                        <h5 class="fw-bold mb-0">854</h5>
+                        <h5 class="fw-bold mb-0"><%= request.getAttribute("guestCount") %></h5>
                     </div>
                 </div>
             </div>
@@ -74,52 +74,80 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <%
+                        List<User> users = (List<User>) request.getAttribute("users");
+
+                        if(users != null){
+                        for(User u : users){
+                    %>
+
                     <tr>
+
                         <td class="ps-4">
                             <div class="d-flex align-items-center">
-                                <img src="https://ui-avatars.com/api/?name=Saman+Kumara&background=0077b6&color=fff" class="rounded-circle me-3" width="38">
+                                <img src="https://ui-avatars.com/api/?name=<%=u.getEmail() %>&background=0077b6&color=fff"
+                                     class="rounded-circle me-3" width="38">
+
                                 <div>
-                                    <div class="fw-bold">Saman Kumara</div>
-                                    <small class="text-muted">Joined: Jan 2026</small>
+                                    <div class="fw-bold"><%=u.getEmail()%></div>
+                                    <small class="text-muted">System User</small>
                                 </div>
                             </div>
                         </td>
-                        <td><span class="text-dark fw-medium">saman_staff</span></td>
-                        <td><span class="badge bg-info-subtle text-info px-3 py-2 rounded-pill">STAFF</span></td>
-                        <td>+94 77 123 4567</td>
+
+                        <td>
+                            <span class="text-dark fw-medium"><%=u.getEmail()%></span>
+                        </td>
+
+                        <td>
+
+                            <%
+                            String role = u.getRole();
+
+                            if(role.equals("ADMIN")){
+                            %>
+                            <span class="badge bg-primary px-3 py-2 rounded-pill">ADMIN</span>
+                            <%
+                            }else if(role.equals("STAFF")){
+                            %>
+                            <span class="badge bg-info-subtle text-info px-3 py-2 rounded-pill">STAFF</span>
+                            <%
+                            }else{
+                            %>
+                            <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">CUSTOMER</span>
+                            <%
+                            }
+                            %>
+
+                        </td>
+
+                        <td><%=u.getEmail()%></td>
+
                         <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-light border me-1" 
-                                    onclick="prepReset('saman_staff', 'Saman Kumara')" 
-                                    data-bs-toggle="modal" data-bs-target="#resetPasswordModal" title="Reset Password">
+
+                            <button class="btn btn-sm btn-light border me-1"
+                                    onclick="prepReset('<%=u.getEmail()%>')"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#resetPasswordModal">
+
                                 <i class="fa-solid fa-key text-warning"></i>
+
                             </button>
+
                             <button class="btn btn-sm btn-light border text-danger">
+
                                 <i class="fa-solid fa-user-minus"></i>
+
                             </button>
+
                         </td>
+
                     </tr>
-                    <tr>
-                        <td class="ps-4">
-                            <div class="d-flex align-items-center">
-                                <img src="https://ui-avatars.com/api/?name=Alice+Smith&background=random" class="rounded-circle me-3" width="38">
-                                <div>
-                                    <div class="fw-bold">Alice Smith</div>
-                                    <small class="text-muted">Guest</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="text-dark fw-medium">alice_88</span></td>
-                        <td><span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">CUSTOMER</span></td>
-                        <td>alice@example.com</td>
-                        <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-light border me-1" onclick="prepReset('alice_88', 'Alice Smith')" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
-                                <i class="fa-solid fa-key text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm btn-light border text-danger">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
+
+                    <%
+                    }
+                    }
+                    %>
                 </tbody>
             </table>
         </div>
@@ -188,9 +216,8 @@
 </div>
 
 <script>
-    function prepReset(username, fullname) {
-        document.getElementById('resetUserId').value = username;
-        document.getElementById('resetUserName').innerText = fullname;
+    function prepReset(email) {
+        document.getElementById('resetUserId').value = email;
     }
 </script>
 

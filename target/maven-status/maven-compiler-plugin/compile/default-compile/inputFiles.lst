@@ -13,6 +13,7 @@ C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\mai
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\dao\RoomType.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\connection\DbConnection.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\util\PasswordUtil.java
+C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\servlet\AdminManageBookingServlet.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\model\Guest.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\util\UserFactory.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\model\RoomBooking.java
@@ -20,6 +21,8 @@ C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\mai
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\servlet\RoomServlet.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\servlet\LoginServlet.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\dao\RoomBookingDAO.java
+C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\servlet\AdminDashboardServlet.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\servlet\RoomTypeServlet.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\resources\JakartaEE10Resource.java
 C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\model\RoomType.java
+C:\Users\hansa\OneDrive\Music\Documents\NetBeansProjects\oceanViewResort\src\main\java\com\oceanviewresort\servlet\AvailableBookingsServlet.java

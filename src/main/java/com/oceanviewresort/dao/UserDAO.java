@@ -5,6 +5,8 @@ import com.oceanviewresort.model.*;
 import com.oceanviewresort.util.PasswordUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -214,5 +216,86 @@ public class UserDAO {
         }
 
         return false;
+    }
+
+    public List<User> getAllUsers() {
+
+    List<User> list = new ArrayList<>();
+    String sql = "SELECT * FROM users ORDER BY role";
+
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            String role = rs.getString("role");
+            User u = null;
+
+            if ("ADMIN".equals(role)) {
+
+                u = new Admin(
+                        rs.getInt("user_id"),
+                        rs.getString("email"),
+                        null,
+                        role,
+                        rs.getString("emp_id"),
+                        rs.getString("admin_role")
+                );
+
+            } else if ("STAFF".equals(role)) {
+
+                u = new Staff(
+                        rs.getInt("user_id"),
+                        rs.getString("email"),
+                        null,
+                        role,
+                        rs.getString("emp_id")
+                );
+
+            } else if ("GUEST".equals(role)) {
+
+                u = new Guest(
+                        rs.getInt("user_id"),
+                        rs.getString("email"),
+                        null,
+                        role,
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("contact_number"),
+                        rs.getString("address")
+                );
+            }
+
+            if (u != null) {
+                list.add(u);
+            }
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return list;
+}
+    public int countByRole(String role) {
+
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM users WHERE role=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            
+            ps.setString(1, role);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
     }
 }

@@ -1,3 +1,14 @@
+<%@ page import="com.oceanviewresort.model.*" %>
+<%
+    Object loggedUser = session.getAttribute("loggedUser");
+
+    if (loggedUser == null || !(loggedUser instanceof StFF)) {
+        response.sendRedirect("../login.jsp");
+        return;
+    }
+
+    Staff staff = (Staff) loggedUser;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

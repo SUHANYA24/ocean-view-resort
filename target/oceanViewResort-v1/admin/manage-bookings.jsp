@@ -1,5 +1,8 @@
 <%@include file="../includes/header_admin.jsp" %>
-
+<%
+List<RoomBooking> bookings = 
+    (List<RoomBooking>) request.getAttribute("availablebookings");
+%>
 <main class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -56,42 +59,54 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <%
+                    if(bookings != null){
+                    for(RoomBooking b : bookings){
+                    %>
+
                     <tr>
-                        <td class="ps-4 fw-bold text-primary">#BK-7702</td>
-                        <td>
-                            <div class="fw-bold text-dark">Johnathan Wick</div>
-                            <small class="text-muted">john.wick@example.com</small>
+                        <td class="ps-4 fw-bold text-primary">
+                            #BK-<%= b.getRoomBookingId() %>
                         </td>
+
                         <td>
-                            <span class="d-block fw-medium">Room 204</span>
-                            <small class="text-muted">Deluxe Ocean</small>
+                            <div class="fw-bold text-dark">
+                                <%= b.getGuestName() %>
+                            </div>
+                            <small class="text-muted">
+                                <%= b.getRoomBookingId() %>
+                            </small>
                         </td>
+
                         <td>
-                            <div class="small fw-bold">Mar 05 - Mar 08</div>
-                            <small class="text-muted text-uppercase" style="font-size: 0.7rem;">3 Nights</small>
+                            <span class="d-block fw-medium">
+                                Room <%= b.getRoomBookingId() %>
+                            </span>
                         </td>
+
                         <td>
-                            <span class="badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill">Checked-In</span>
-                        </td>
-                        <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-outline-dark me-1" 
-                                    onclick="generateInvoice('BK-7702', 'Johnathan Wick', 'Deluxe Ocean', 3, 150.00)" 
-                                    data-bs-toggle="modal" data-bs-target="#billingModal">
-                                <i class="fa-solid fa-file-invoice-dollar me-1"></i> Bill
-                            </button>
-                            <div class="dropdown d-inline-block">
-                                <button class="btn btn-sm btn-light border dropdown-toggle" data-bs-toggle="dropdown">
-                                    Manage
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-check me-2"></i> Check Out</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen me-2"></i> Edit Dates</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-ban me-2"></i> Cancel</a></li>
-                                </ul>
+                            <div class="small fw-bold">
+                                <%= b.getCheckIn() %> - <%= b.getCheckOut() %>
                             </div>
                         </td>
+
+                        <td>
+                            <span class="badge bg-success">Confirmed</span>
+                        </td>
+
+                        <td class="text-end pe-4">
+                            <button class="btn btn-sm btn-outline-dark">
+                                Bill
+                            </button>
+                        </td>
                     </tr>
+
+                    <%
+                    }
+                    }
+                    %>
+
                 </tbody>
             </table>
         </div>
@@ -117,7 +132,7 @@
                             <h5 class="fw-bold" id="invResId">#BK-0000</h5>
                         </div>
                     </div>
-                    
+
                     <table class="table table-sm border-top">
                         <thead class="bg-light">
                             <tr>
@@ -159,6 +174,62 @@
         </div>
     </div>
 </div>
+                    
+                    <div class="modal fade" id="newBookingModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow">
+            <form action="${pageContext.request.contextPath}/admin/manage-bookings" method="POST">
+                
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">New Walk-in Booking</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Guest Name</label>
+                            <input type="text" name="guestName" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Contact Number</label>
+                            <input type="text" name="contact" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Room ID</label>
+                            <input type="number" name="roomId" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Room Type</label>
+                            <input type="text" name="roomType" class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Check-In</label>
+                            <input type="date" name="checkIn" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Check-Out</label>
+                            <input type="date" name="checkOut" class="form-control" required>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Booking</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
     function generateInvoice(resId, name, room, nights, rate) {
@@ -175,10 +246,21 @@
 
 <style>
     @media print {
-        body * { visibility: hidden; }
-        #printableInvoice, #printableInvoice * { visibility: visible; }
-        #printableInvoice { position: absolute; left: 0; top: 0; width: 100%; }
-        .d-print-none { display: none !important; }
+        body * {
+            visibility: hidden;
+        }
+        #printableInvoice, #printableInvoice * {
+            visibility: visible;
+        }
+        #printableInvoice {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+        .d-print-none {
+            display: none !important;
+        }
     }
 </style>
 

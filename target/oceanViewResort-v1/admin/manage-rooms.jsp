@@ -1,7 +1,7 @@
 <%@include file="../includes/header_admin.jsp" %>
 
 <main class="container py-4">
-    
+
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="fw-bold mb-0 text-dark">Room Management</h2>
@@ -19,6 +19,11 @@
 
     <h5 class="fw-bold mb-3"><i class="fa-solid fa-layer-group me-2 text-primary"></i>Active Categories & Rates</h5>
     <div class="row g-3 mb-5">
+        <%
+                        List<RoomType> types = (List<RoomType>)request.getAttribute("types");
+                        for(RoomType t : types){
+        %>
+
         <div class="col-md-4">
             <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-body">
@@ -38,25 +43,9 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm rounded-4 h-100">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div class="bg-success bg-opacity-10 p-3 rounded-3">
-                            <i class="fa-solid fa-water text-success fa-lg"></i>
-                        </div>
-                        <button class="btn btn-sm btn-light border-0" 
-                                onclick="populateTypeModal('2', 'Deluxe Ocean', '150.00')" 
-                                data-bs-toggle="modal" data-bs-target="#editTypeModal">
-                            <i class="fa-solid fa-ellipsis-v"></i>
-                        </button>
-                    </div>
-                    <h6 class="fw-bold mb-1">Deluxe Ocean Front</h6>
-                    <h4 class="text-success fw-bold mb-0">$150.00 <small class="text-muted fs-6">/ night</small></h4>
-                </div>
-            </div>
-        </div>
-
+        <%
+        }
+        %>
         <div class="col-md-4">
             <div class="card border-2 border-dashed h-100 d-flex align-items-center justify-content-center bg-light" 
                  style="cursor: pointer; border-style: dashed !important;" data-bs-toggle="modal" data-bs-target="#addTypeModal">
@@ -82,28 +71,34 @@
                     <tr>
                         <th class="ps-4">Room Number</th>
                         <th>Category</th>
-                        <th>Floor</th>
                         <th>Status</th>
                         <th class="text-end pe-4">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <%
+                        List<Room> rooms = (List<Room>)request.getAttribute("rooms");
+                        for(Room r : rooms){
+                    %>
+
                     <tr>
-                        <td class="ps-4 fw-bold">101</td>
-                        <td><span class="badge bg-primary bg-opacity-10 text-primary px-3">Standard Garden</span></td>
-                        <td>Ground Floor</td>
+                        <td class="ps-4 fw-bold"><%= r.getRoomNumber() %></td>
+                        <td>
+                            <span class="badge bg-primary bg-opacity-10 text-primary px-3">
+                                <%= r.getRoomType().getRoomType() %>
+                            </span>
+                        </td>
                         <td><span class="badge bg-success text-white px-3">Active</span></td>
                         <td class="text-end pe-4">
-                            <button class="btn btn-sm btn-outline-secondary border-0 me-1" 
-                                    onclick="populateRoomModal('101', '1', 'Ground Floor', 'Active')"
-                                    data-bs-toggle="modal" data-bs-target="#editRoomModal">
+                            <button class="btn btn-sm btn-outline-secondary border-0">
                                 <i class="fa-solid fa-pen"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger border-0">
-                                <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>
+
+                    <%
+                    }
+                    %>
                 </tbody>
             </table>
         </div>
@@ -182,8 +177,12 @@
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Category</label>
                             <select name="typeId" class="form-select">
-                                <option value="1">Standard Garden</option>
-                                <option value="2">Deluxe Ocean</option>
+                                <option value="">Select Type</option>
+                                <%
+                                    for(RoomType t : types){
+                                %>
+                                <option value="<%= t.getRoomTypeId() %>"><%= t.getRoomType() %></option>
+                                <% };%>
                             </select>
                         </div>
                         <div class="col-md-12">

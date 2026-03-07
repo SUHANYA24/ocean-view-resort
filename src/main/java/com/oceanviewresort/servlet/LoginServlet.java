@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("loggedUser", user);
 
-            if (user.isAdmin()) response.sendRedirect("adminDashboard.jsp");
+            if (user.isAdmin()) response.sendRedirect("admin/dashboard");
             else if (user.isStaff()) response.sendRedirect("staffDashboard.jsp");
             else response.sendRedirect("index.jsp");
         } else {

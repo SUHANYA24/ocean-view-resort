@@ -115,7 +115,7 @@ public class RoomBookingDAO {
 
         List<RoomBooking> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM room_bookings";
+        String sql = "SELECT rb.*,room_number FROM room_bookings rb LEFT JOIN rooms r ON r.room_id = rb.room_id";
 
         try (PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
@@ -125,6 +125,7 @@ public class RoomBookingDAO {
 
                 Room room = new Room();
                 room.setRoomId(rs.getInt("room_id"));
+                room.setRoomNumber(rs.getString("room_number"));
 
                 if ("ONLINE".equals(type)) {
 
@@ -169,7 +170,7 @@ public class RoomBookingDAO {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
