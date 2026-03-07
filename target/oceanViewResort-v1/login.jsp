@@ -12,9 +12,9 @@
                             <p class="text-muted">Login to manage your reservations</p>
                         </div>
                         
-                        <% if(request.getParameter("msg") != null) { %>
+                        <% if(request.getParameter("error") != null) { %>
                             <div class="alert alert-warning border-0 small">
-                                <i class="fa-solid fa-circle-info me-2"></i> <%= request.getParameter("msg") %>
+                                <i class="fa-solid fa-circle-info me-2"></i> <%= request.getParameter("error") %>
                             </div>
                         <% } %>
 

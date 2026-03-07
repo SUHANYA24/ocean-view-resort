@@ -4,6 +4,15 @@
         <div class="col-md-6">
             <div class="card border-0 shadow p-4">
                 <h3 class="fw-bold mb-4">Create Your Account</h3>
+
+                <%-- Show error if exists --%>
+                <% if(request.getAttribute("error") != null) { %>
+                    <div class="alert alert-danger mb-3">
+                        <i class="fa-solid fa-circle-exclamation me-2"></i>
+                        <%= request.getAttribute("error") %>
+                    </div>
+                <% } %>
+
                 <form action="register" method="POST" class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label">First Name</label>
@@ -15,7 +24,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Email/Username</label>
-                        <input type="text" name="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" required>
                     </div>
                     <div class="col-12">
                         <label class="form-label">Address</label>
@@ -38,3 +47,5 @@
         </div>
     </div>
 </div>
+
+<%@include file="includes/footer.jsp" %>

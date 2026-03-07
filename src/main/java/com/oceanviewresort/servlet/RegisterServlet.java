@@ -19,10 +19,6 @@ public class RegisterServlet extends HttpServlet {
         userDAO = new UserDAO();
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.getWriter().println("RegisterServlet is working!");
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,20 +28,28 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        if (role == null || email == null || password == null) {
+        if (role == null || email == null || password == null ||
+            request.getParameter("firstName") == null || request.getParameter("lastName") == null) {
             request.setAttribute("error", "All fields are required");
             request.getRequestDispatcher("register.jsp").forward(request, response);
             return;
         }
 
-        User user = UserFactory.createUserFromRequest(request, role, email, password, 0);
+        // Create Guest object
+        User user = UserFactory.createUserFromRequest(
+                request,
+                role,
+                email,
+                password,
+                0 // ID will be auto-generated
+        );
 
         boolean success = userDAO.registerUser(user);
 
         if (success) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login.jsp?msg=Account created successfully, please login.");
         } else {
-            request.setAttribute("error", "Registration failed");
+            request.setAttribute("error", "Registration failed. Email might already exist.");
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }

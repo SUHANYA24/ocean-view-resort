@@ -120,14 +120,7 @@
     </div>
 </section>
 
-<footer class="bg-dark text-white pt-5 pb-4 mt-5">
-    <div class="container text-center">
-        <h4 class="fw-bold text-primary mb-3">Ocean View Resort</h4>
-        <p class="text-muted small mb-4">Galle Road, Galle, Sri Lanka | +94 11 234 5678</p>
-        <hr class="opacity-10 mb-4">
-        <p class="mb-0 small text-muted">&copy; 2026 Ocean View Resort. All Rights Reserved.</p>
-    </div>
-</footer>
+
 
 <style>
     .transition-up:hover { transform: translateY(-10px); transition: all 0.3s ease; }

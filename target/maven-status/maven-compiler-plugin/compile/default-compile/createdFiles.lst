@@ -28,4 +28,5 @@ com\oceanviewresort\servlet\AdminManageRoomsServlet.class
 com\oceanviewresort\servlet\RegisterServlet.class
 com\oceanviewresort\servlet\LoginServlet.class
 com\oceanviewresort\servlet\UserManagementServlet.class
+com\oceanviewresort\servlet\LogoutServlet.class
 com\oceanviewresort\servlet\RoomServlet.class
