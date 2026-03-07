@@ -57,6 +57,7 @@ class UserDAOTest {
 
         assertTrue(result);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 1: RegisterUserGuest  Passed");
     }
 
     @Test
@@ -79,6 +80,7 @@ class UserDAOTest {
         assertNotNull(user);
         assertTrue(user instanceof Guest);
         assertEquals("test@example.com", user.getEmail());
+        System.out.println("Test 2: LoginUserGuest  Passed");
     }
 
     @Test
@@ -98,6 +100,7 @@ class UserDAOTest {
 
         assertTrue(updated);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 3: UpdateUserAdmin  Passed");
     }
 
     @Test
@@ -109,6 +112,7 @@ class UserDAOTest {
 
         assertTrue(deleted);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 4: DeleteUser  Passed");
     }
 
     @Test
@@ -121,5 +125,6 @@ class UserDAOTest {
         int count = userDAO.countByRole("GUEST");
 
         assertEquals(5, count);
+        System.out.println("Test 5: CountByRole  Passed");
     }
 }

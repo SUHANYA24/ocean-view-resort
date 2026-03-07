@@ -51,6 +51,7 @@ class RoomTypeDAOTest {
 
         assertTrue(result);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 1: AddRoomType Passed");
     }
 
     @Test
@@ -69,6 +70,7 @@ class RoomTypeDAOTest {
         assertNotNull(roomType);
         assertEquals("Deluxe", roomType.getRoomType());
         assertEquals(150.0, roomType.getPricePerNight());
+        System.out.println("Test 2: GetRoomTypeById  Passed");
     }
 
     @Test
@@ -86,6 +88,7 @@ class RoomTypeDAOTest {
 
         assertEquals(2, list.size());
         assertEquals("Suite", list.get(1).getRoomType());
+        System.out.println("Test 3: GetAllRoomTypes  Passed");
     }
 
     @Test
@@ -103,6 +106,7 @@ class RoomTypeDAOTest {
 
         assertTrue(updated);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 4: UpdateRoomType  Passed");
     }
 
     @Test
@@ -114,5 +118,6 @@ class RoomTypeDAOTest {
 
         assertTrue(deleted);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 5: DeleteRoomType  Passed");
     }
 }

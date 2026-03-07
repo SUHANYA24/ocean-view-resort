@@ -46,6 +46,7 @@ class RoomBookingDAOTest {
 
         assertEquals(2, rooms.size());
         assertEquals("102", rooms.get(1).getRoomNumber());
+        System.out.println("Test 1: GetAvailableRooms  Passed");
     }
 
     @Test
@@ -66,6 +67,7 @@ class RoomBookingDAOTest {
 
         assertTrue(result);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 2: AddBookingOnline  Passed");
     }
 
     @Test
@@ -86,6 +88,7 @@ class RoomBookingDAOTest {
 
         assertTrue(result);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 3: AddBookingWalkIn ✅ Passed");
     }
 
     @Test
@@ -97,6 +100,7 @@ class RoomBookingDAOTest {
 
         assertTrue(deleted);
         verify(mockPreparedStatement, times(1)).executeUpdate();
+        System.out.println("Test 4: DeleteBooking  Passed");
     }
 
     @Test
@@ -109,6 +113,7 @@ class RoomBookingDAOTest {
         int count = roomBookingDAO.countArrivals(LocalDate.now());
 
         assertEquals(5, count);
+        System.out.println("Test 5: CountArrivals  Passed");
     }
 
     @Test
@@ -121,5 +126,6 @@ class RoomBookingDAOTest {
         int count = roomBookingDAO.countDepartures(LocalDate.now());
 
         assertEquals(3, count);
+        System.out.println("Test 6: CountDepartures  Passed");
     }
 }
